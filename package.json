@@ -1,0 +1,18 @@
+{
+  "name": "jira-test-case-generator",
+  "version": "1.0.0",
+  "description": "Automated test case generator from JIRA tickets",
+  "main": "jira_testcase_generator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node jira_testcase_generator.js"
+  },
+  "keywords": ["jira", "test-cases", "automation", "excel"],
+  "author": "Arjun Puneeth",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "exceljs": "^4.3.0"
+  },
+  "devDependencies": {}
+}
