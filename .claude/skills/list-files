@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# /list-files skill - Display all generated test case files
+
+OUTPUT_DIR="GA_testcases"
+
+if [ ! -d "$OUTPUT_DIR" ]; then
+    echo "Error: Directory $OUTPUT_DIR not found"
+    exit 1
+fi
+
+echo "=== GENERATED TEST CASE FILES ==="
+echo ""
+
+# Count files
+FILE_COUNT=$(find "$OUTPUT_DIR" -maxdepth 1 -name "*.xlsx" 2>/dev/null | wc -l)
+
+if [ $FILE_COUNT -eq 0 ]; then
+    echo "No test case files generated yet."
+    echo ""
+    echo "Run: /automate GAAM-618"
+    exit 0
+fi
+
+echo "Total Files: $FILE_COUNT"
+echo ""
+
+# List files with details
+ls -lhS "$OUTPUT_DIR"/*.xlsx 2>/dev/null | awk '{
+    printf "[%d] FILE NAME:\n", ++count
+    split($9, a, "/")
+    printf "     %s\n", a[length(a)]
+    printf "    Size: %s\n", $5
+    printf "    Modified: %s %s %s\n", $6, $7, $8
+    printf "\n"
+}'
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Location: $(pwd)/$OUTPUT_DIR"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# /automate skill - Generate JIRA test cases
+# Usage: /automate GAAM-618 GAAM-687 GAAM-620
+
+TICKETS="$*"
+
+if [ -z "$TICKETS" ]; then
+    echo "Usage: /automate <TICKET_KEY_1> [TICKET_KEY_2] [TICKET_KEY_3] ..."
+    echo ""
+    echo "Examples:"
+    echo "  /automate GAAM-618"
+    echo "  /automate GAAM-618 GAAM-687"
+    echo "  /automate GAAM-618 GAAM-687 GAAM-620"
+    exit 1
+fi
+
+# The script should be in the current working directory (GA_testcases)
+if [ ! -f "jira_testcase_generator.js" ]; then
+    echo "Error: jira_testcase_generator.js not found in current directory"
+    exit 1
+fi
+
+node jira_testcase_generator.js $TICKETS
