@@ -91,7 +91,7 @@ jobs:
         with:
           project: 'JIRA Test Case Generator'
           path: '.'
-          format: 'All'
+          format: 'ALL'
 
   code-quality:
     runs-on: ubuntu-latest
