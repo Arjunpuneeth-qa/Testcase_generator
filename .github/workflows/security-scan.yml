@@ -92,8 +92,6 @@ jobs:
           project: 'JIRA Test Case Generator'
           path: '.'
           format: 'All'
-          args: >
-            --enable-retired
 
   code-quality:
     runs-on: ubuntu-latest
