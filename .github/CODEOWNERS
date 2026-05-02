@@ -1,0 +1,12 @@
+# This file specifies code owners for the repository
+# Code owners are automatically requested for review on pull requests
+
+# Everyone - Arjun must review all changes
+* @Arjunpuneeth-qa
+
+# Specific file ownership
+.github/workflows/ @Arjunpuneeth-qa
+*.md @Arjunpuneeth-qa
+.env @Arjunpuneeth-qa
+sonar-project.properties @Arjunpuneeth-qa
+CLAUDE.md @Arjunpuneeth-qa
