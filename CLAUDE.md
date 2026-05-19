@@ -5,58 +5,58 @@ Automated test case generator that creates comprehensive test cases from JIRA ti
 
 ## Custom Skills
 
-### /testcase (ENHANCED MASTER VERSION) ⭐ **RECOMMENDED**
-Generate comprehensive test cases with reference-quality detail + ALL generators combined + Boundary Testing + Professional formatting.
+### /testcase (REFERENCE FORMAT VERSION) ⭐ **RECOMMENDED**
+Generate comprehensive test cases in EXACT reference format + 83 tests + Same columns/summary as GAAM-524.
 
 **Usage:**
 ```bash
-/testcase GAAM-933                          # Single ticket
-/testcase GAAM-933 GAAM-524 GAAM-687       # Multiple tickets
+testcase-reference GAAM-933                          # Single ticket
+testcase-reference GAAM-933 GAAM-524 GAAM-687       # Multiple tickets
 ```
 
 **Features:**
-- 🚀 **ALL Generators Combined** (V2 + V3 + V4 + Ultimate + Enhanced)
-- 📊 **83 Test Cases Per Ticket** (reference-quality)
-- ✅ **26 Boundary Value Tests Included**
-- 📋 **TEST CASE SUMMARY Sheet** with professional breakdown
+- ✅ **EXACT Same Format** as GAAM-524 reference file
+  - Same column headers: TC_ID, Test Type, Test Scenario, Pre-Condition, Test Steps, Test Data, Expected Result, Status
+  - Same summary layout: TEST CASE SUMMARY section at bottom with breakdown by test type
+  - Professional Excel formatting with styling
+- 📊 **83 Test Cases Per Ticket** (vs 57 in reference)
+- ✅ **26 Boundary Value Tests** (Numeric, String, Date, Array, Null/Undefined)
 - 🧠 Intelligent JIRA ticket analysis
 - 🎯 Acceptance criteria extraction
 - 🔍 Feature-specific detection with detailed specifications
 - 📝 Detailed step-by-step test instructions with exact measurements
-- 🛡️ Security tests (SQL injection, CSRF, XSS, encryption)
-- 🌐 Responsive design tests (9 specific device breakpoints: 320px to 2560px)
-- ♿ Accessibility tests (WCAG 2.2, color contrast 4.5:1, tool-specific: NVDA, JAWS, Level Access)
-- 🔧 Compatibility tests (Chrome/Firefox/Safari/Edge desktop + mobile)
-- 📈 Performance, Integration, UI/UX tests with specific measurements (#6B46C1 colors, 44x44px touch targets, etc.)
+- 🛡️ Security tests (SQL injection, CSRF, XSS, encryption) - 4 tests
+- 🌐 Responsive design tests (9 tests: 320px, 414px, 768px, 1024px, 1366px, 1920px, 2560px + transitions + orientation)
+- ♿ Accessibility tests (7 tests: WCAG 2.2, color contrast 4.5:1, NVDA, JAWS, Level Access, keyboard nav, touch targets 44x44px)
+- 🔧 Cross-Browser tests (7 tests: Chrome, Firefox, Safari, Edge desktop, Safari mobile, Chrome mobile, API)
+- 📈 Performance (3 tests), Integration (3 tests), UI/UX (7 tests) with specific measurements (#6B46C1, 24px spacing, etc.)
 
 **Test Cases Generated (83 Total):**
 - ✅ 7 Positive (rendering, fields, design, interactions, hierarchy, forms, responsive)
 - ✅ 7 Negative (empty, XSS, long text, special chars, missing fields, large datasets, invalid)
-- ✅ 7 Edge Cases (single chars, Unicode, whitespace, mixed fields, boundaries, case sensitivity)
+- ✅ 7 Edge Cases (single chars, Unicode, whitespace, mixed fields, boundaries, case sensitivity, concurrent)
 - ✅ 4 Security Tests (SQL injection, CSRF, authentication, encryption)
 - ✅ 3 Performance Tests (load time <3s, large datasets, image optimization)
-- ✅ 7 Accessibility Tests (WCAG 2.2, contrast, screen readers, keyboard nav, 200% zoom, touch)
-- ✅ 9 Responsive Design Tests (320px, 414px, 768px, 1024px, 1366px, 1920px, 2560px + transitions)
+- ✅ 7 Accessibility Tests (WCAG 2.2, contrast 4.5:1, NVDA/JAWS, keyboard nav, 200% zoom, critical violations, touch 44x44px)
+- ✅ 9 Responsive Design Tests (320x568px, 414x896px, 768x1024px, 1024x768px, 1366x768px, 1920x1080px, 2560x1440px + transitions + orientation)
 - ✅ 7 Cross-Browser Tests (Chrome, Firefox, Safari, Edge desktop, Safari mobile, Chrome mobile, API)
-- ✅ 7 UI/UX Tests (purple header, typography, spacing, bullets, statistics, hierarchy, states)
+- ✅ 7 UI/UX Tests (purple header #6B46C1, typography, spacing, bullets, statistics, hierarchy, hover/focus states)
 - ✅ 3 Integration Tests (API, database, third-party services)
 - ✅ **26 Boundary Value Tests** ⭐ (numeric, string, date, array, null/undefined)
 
-**Sheets Included:**
-1. **Test Cases** - All 83 comprehensive test cases with specific measurements
-2. **Summary** - Professional breakdown table by test type
-3. **Ticket Details** - JIRA ticket metadata and generation info
+**Excel Structure (Same as GAAM-524 Reference):**
+- **Test Cases Data**: All 83 test cases with 8 columns (TC_ID, Test Type, Test Scenario, Pre-Condition, Test Steps, Test Data, Expected Result, Status)
+- **Summary Section**: TEST CASE SUMMARY at bottom with breakdown by test type (Total: 83, Positive: 7, Negative: 7, etc.)
 
 **File Format:**
-- Output: `{TICKET_ID}_ENHANCED_MASTER_{Description}.xlsx`
+- Output: `{TICKET_ID}_REFERENCE_FORMAT_{Description}.xlsx`
 - Location: `GA_testcases/` folder (automatically created)
-- Format: .xlsx (Excel 2007+) with 3 professional sheets
+- Format: .xlsx (Excel 2007+) - EXACT same structure as GAAM-524 reference file
 
 **Command:**
 ```bash
-/testcase GAAM-933
-testcase-master GAAM-933
-node jira_testcase_generator_master_enhanced.js GAAM-933
+testcase-reference GAAM-933
+node jira_testcase_generator_reference_format.js GAAM-933
 ```
 
 **Benefits:**

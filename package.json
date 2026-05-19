@@ -7,12 +7,17 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node jira_testcase_generator.js"
   },
-  "keywords": ["jira", "test-cases", "automation", "excel"],
+  "keywords": [
+    "jira",
+    "test-cases",
+    "automation",
+    "excel"
+  ],
   "author": "Arjun Puneeth",
   "license": "MIT",
   "dependencies": {
+    "axios": "^1.16.1",
     "dotenv": "^16.0.3",
     "exceljs": "^4.3.0"
-  },
-  "devDependencies": {}
+  }
 }
