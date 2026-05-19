@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 /**
- * ENHANCED TEST CASE GENERATOR - Reference Format
+ * TEST CASE GENERATOR - Reference Format
  * ============================================
- * Generates test cases in EXACT reference file format
+ * Generates test cases in EXACT reference file format (GAAM-524)
  * - Same column headers
+ * - Same test step formatting (bullet points)
  * - Same summary layout
- * - Same styling (Excel formatting)
- * - 83 comprehensive test cases
+ * - Professional Excel formatting
  */
 
 const axios = require('axios');
@@ -43,7 +43,7 @@ function generateTestCases(ticket) {
     {
       'Test Scenario': 'Verify styling matches Figma design',
       'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Open Figma design reference\n• Compare colors (purple header #6B46C1)\n• Check spacing and padding\n• Verify typography matches',
+      'Test Steps': '• Open Figma design reference\n• Compare colors (purple header)\n• Check spacing and padding\n• Verify typography matches',
       'Test Data': 'Figma design URL',
       'Expected Result': 'UI matches design exactly',
     },
@@ -62,14 +62,14 @@ function generateTestCases(ticket) {
       'Expected Result': 'Content hierarchy is clear',
     },
     {
-      'Test Scenario': 'Verify form submission',
+      'Test Scenario': 'Verify form submission and data persistence',
       'Pre-Condition': 'User is logged in',
       'Test Steps': '• Fill all required form fields\n• Submit the form\n• Verify success message\n• Check data is persisted',
       'Test Data': 'Valid form data',
-      'Expected Result': 'Form submits successfully; Data persisted',
+      'Expected Result': 'Form submits successfully',
     },
     {
-      'Test Scenario': 'Verify responsive behavior on target viewport',
+      'Test Scenario': 'Verify responsive behavior',
       'Pre-Condition': 'User is logged in',
       'Test Steps': '• Test on multiple viewports\n• Verify layout adapts correctly\n• Check no horizontal scrolling\n• Verify content readable',
       'Test Data': 'Multiple viewport sizes',
@@ -199,7 +199,7 @@ function generateTestCases(ticket) {
       'Pre-Condition': 'User is logged in',
       'Test Steps': '• Open form in multiple tabs\n• Edit same record simultaneously\n• Submit changes\n• Verify conflict handling',
       'Test Data': 'Concurrent user sessions',
-      'Expected Result': 'Concurrent edits handled; No data corruption',
+      'Expected Result': 'Concurrent edits handled',
     },
   ];
 
@@ -207,48 +207,6 @@ function generateTestCases(ticket) {
     testCases.push({
       TC_ID: `TC_${String(tcId).padStart(3, '0')}`,
       'Test Type': 'Edge Case',
-      ...test,
-      'Status': '',
-    });
-    tcId++;
-  });
-
-  // ========== SECURITY TESTS (4 tests) ==========
-  const securityTests = [
-    {
-      'Test Scenario': 'Verify SQL injection prevention',
-      'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Input SQL injection strings\n• Test with quotes and semicolons\n• Verify parameterized queries\n• Check no database errors exposed',
-      'Test Data': "'; DROP TABLE--; SELECT * FROM;",
-      'Expected Result': 'SQL injection prevented; Input validated',
-    },
-    {
-      'Test Scenario': 'Verify CSRF attack prevention',
-      'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Check CSRF tokens present\n• Verify token validation\n• Test cross-origin requests\n• Check same-site cookies',
-      'Test Data': 'CSRF token verification',
-      'Expected Result': 'CSRF tokens validated; Attacks prevented',
-    },
-    {
-      'Test Scenario': 'Verify secure authentication',
-      'Pre-Condition': 'User authentication configured',
-      'Test Steps': '• Test password hashing\n• Verify SSL/TLS usage\n• Check no credentials in logs\n• Verify secure session handling',
-      'Test Data': 'User credentials',
-      'Expected Result': 'Credentials secure; HTTPS enforced',
-    },
-    {
-      'Test Scenario': 'Verify data encryption',
-      'Pre-Condition': 'Encryption configured',
-      'Test Steps': '• Verify sensitive data encrypted\n• Check encryption algorithm\n• Test key management\n• Verify no plaintext storage',
-      'Test Data': 'Sensitive data (PII)',
-      'Expected Result': 'Data encrypted at rest and in transit',
-    },
-  ];
-
-  securityTests.forEach(test => {
-    testCases.push({
-      TC_ID: `TC_${String(tcId).padStart(3, '0')}`,
-      'Test Type': 'Security',
       ...test,
       'Status': '',
     });
@@ -395,70 +353,7 @@ function generateTestCases(ticket) {
     tcId++;
   });
 
-  // ========== UI/UX TESTS (7 tests) ==========
-  const uiTests = [
-    {
-      'Test Scenario': 'Verify purple header bar styling',
-      'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Check header background color\n• Verify hex #6B46C1 or equivalent\n• Check padding/spacing\n• Verify text color white',
-      'Test Data': 'Purple header (#6B46C1)',
-      'Expected Result': 'Header styled correctly',
-    },
-    {
-      'Test Scenario': 'Verify typography and font sizes',
-      'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Check title font size\n• Verify body text size\n• Check line spacing\n• Verify font family consistent',
-      'Test Data': 'Figma design specs',
-      'Expected Result': 'Typography matches spec',
-    },
-    {
-      'Test Scenario': 'Verify spacing and padding consistency',
-      'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Measure margins between elements\n• Check padding inside containers\n• Verify whitespace balance\n• Compare with Figma',
-      'Test Data': 'Spacing measurements',
-      'Expected Result': 'Spacing matches design',
-    },
-    {
-      'Test Scenario': 'Verify bullet point formatting',
-      'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Check bullet symbol\n• Verify indentation\n• Check line height\n• Verify alignment',
-      'Test Data': 'Bullet list component',
-      'Expected Result': 'Bullet formatting correct',
-    },
-    {
-      'Test Scenario': 'Verify statistical block display',
-      'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Check number display\n• Verify label text\n• Check icon display\n• Verify alignment in layout',
-      'Test Data': 'Statistics block data',
-      'Expected Result': 'Statistics display correctly',
-    },
-    {
-      'Test Scenario': 'Verify visual hierarchy',
-      'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Check title prominence\n• Verify emphasis on key elements\n• Check visual weight\n• Verify focus areas clear',
-      'Test Data': 'Visual design review',
-      'Expected Result': 'Hierarchy is clear',
-    },
-    {
-      'Test Scenario': 'Verify hover and focus states',
-      'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Check button hover color\n• Verify focus outline visible\n• Check transition smooth\n• Verify all interactive elements have states',
-      'Test Data': 'Interactive element states',
-      'Expected Result': 'States display correctly',
-    },
-  ];
-
-  uiTests.forEach(test => {
-    testCases.push({
-      TC_ID: `TC_${String(tcId).padStart(3, '0')}`,
-      'Test Type': 'UI',
-      ...test,
-      'Status': '',
-    });
-    tcId++;
-  });
-
-  // ========== COMPATIBILITY TESTS (7 tests) ==========
+  // ========== CROSS-BROWSER TESTS (7 tests) ==========
   const compatibilityTests = [
     {
       'Test Scenario': 'Verify Chrome desktop rendering',
@@ -503,11 +398,11 @@ function generateTestCases(ticket) {
       'Expected Result': 'Works correctly on Chrome mobile',
     },
     {
-      'Test Scenario': 'Verify API response handling',
+      'Test Scenario': 'Verify consistent behavior across browsers',
       'Pre-Condition': 'User is logged in',
-      'Test Steps': '• Test with valid API response\n• Test null response\n• Test malformed data\n• Verify error handling',
-      'Test Data': 'API endpoints and responses',
-      'Expected Result': 'Responses handled correctly',
+      'Test Steps': '• Compare rendering across browsers\n• Check for browser-specific issues\n• Verify consistent user experience\n• Document differences',
+      'Test Data': 'Multiple browser versions',
+      'Expected Result': 'Behavior consistent across browsers',
     },
   ];
 
@@ -515,6 +410,69 @@ function generateTestCases(ticket) {
     testCases.push({
       TC_ID: `TC_${String(tcId).padStart(3, '0')}`,
       'Test Type': 'Cross-Browser',
+      ...test,
+      'Status': '',
+    });
+    tcId++;
+  });
+
+  // ========== UI/UX TESTS (7 tests) ==========
+  const uiTests = [
+    {
+      'Test Scenario': 'Verify purple header bar styling',
+      'Pre-Condition': 'User is logged in',
+      'Test Steps': '• Check header background color\n• Verify hex #6B46C1 or equivalent\n• Check padding/spacing\n• Verify text color white',
+      'Test Data': 'Purple header (#6B46C1)',
+      'Expected Result': 'Header styled correctly',
+    },
+    {
+      'Test Scenario': 'Verify typography and font sizes',
+      'Pre-Condition': 'User is logged in',
+      'Test Steps': '• Check title font size\n• Verify body text size\n• Check line spacing\n• Verify font family consistent',
+      'Test Data': 'Figma design specs',
+      'Expected Result': 'Typography matches spec',
+    },
+    {
+      'Test Scenario': 'Verify spacing and padding consistency',
+      'Pre-Condition': 'User is logged in',
+      'Test Steps': '• Measure margins between elements\n• Check padding inside containers\n• Verify whitespace balance\n• Compare with Figma',
+      'Test Data': 'Spacing measurements',
+      'Expected Result': 'Spacing matches design',
+    },
+    {
+      'Test Scenario': 'Verify bullet point formatting',
+      'Pre-Condition': 'User is logged in',
+      'Test Steps': '• Check bullet symbol\n• Verify indentation\n• Check line height\n• Verify alignment',
+      'Test Data': 'Bullet list component',
+      'Expected Result': 'Bullet formatting correct',
+    },
+    {
+      'Test Scenario': 'Verify statistical block display',
+      'Pre-Condition': 'User is logged in',
+      'Test Steps': '• Check number display\n• Verify label text\n• Check icon display\n• Verify alignment in layout',
+      'Test Data': 'Statistics block data',
+      'Expected Result': 'Statistics display correctly',
+    },
+    {
+      'Test Scenario': 'Verify borders and dividers',
+      'Pre-Condition': 'User is logged in',
+      'Test Steps': '• Check for dividers between sections\n• Verify border colors\n• Check border width\n• Verify alignment',
+      'Test Data': 'Component layout',
+      'Expected Result': 'Borders display correctly',
+    },
+    {
+      'Test Scenario': 'Verify visual hierarchy',
+      'Pre-Condition': 'User is logged in',
+      'Test Steps': '• Check title prominence\n• Verify emphasis on key elements\n• Check visual weight\n• Verify focus areas clear',
+      'Test Data': 'Visual design review',
+      'Expected Result': 'Hierarchy is clear',
+    },
+  ];
+
+  uiTests.forEach(test => {
+    testCases.push({
+      TC_ID: `TC_${String(tcId).padStart(3, '0')}`,
+      'Test Type': 'UI',
       ...test,
       'Status': '',
     });
@@ -591,25 +549,67 @@ function generateTestCases(ticket) {
     tcId++;
   });
 
+  // ========== SECURITY TESTS (4 tests) ==========
+  const securityTests = [
+    {
+      'Test Scenario': 'Verify SQL injection prevention',
+      'Pre-Condition': 'User is logged in',
+      'Test Steps': '• Input SQL injection strings\n• Test with quotes and semicolons\n• Verify parameterized queries\n• Check no database errors exposed',
+      'Test Data': "'; DROP TABLE--; SELECT * FROM;",
+      'Expected Result': 'SQL injection prevented',
+    },
+    {
+      'Test Scenario': 'Verify CSRF attack prevention',
+      'Pre-Condition': 'User is logged in',
+      'Test Steps': '• Check CSRF tokens present\n• Verify token validation\n• Test cross-origin requests\n• Check same-site cookies',
+      'Test Data': 'CSRF token verification',
+      'Expected Result': 'CSRF tokens validated',
+    },
+    {
+      'Test Scenario': 'Verify secure authentication',
+      'Pre-Condition': 'User authentication configured',
+      'Test Steps': '• Test password hashing\n• Verify SSL/TLS usage\n• Check no credentials in logs\n• Verify secure session handling',
+      'Test Data': 'User credentials',
+      'Expected Result': 'Credentials secure',
+    },
+    {
+      'Test Scenario': 'Verify data encryption',
+      'Pre-Condition': 'Encryption configured',
+      'Test Steps': '• Verify sensitive data encrypted\n• Check encryption algorithm\n• Test key management\n• Verify no plaintext storage',
+      'Test Data': 'Sensitive data (PII)',
+      'Expected Result': 'Data encrypted at rest and in transit',
+    },
+  ];
+
+  securityTests.forEach(test => {
+    testCases.push({
+      TC_ID: `TC_${String(tcId).padStart(3, '0')}`,
+      'Test Type': 'Security',
+      ...test,
+      'Status': '',
+    });
+    tcId++;
+  });
+
   // ========== BOUNDARY VALUE TESTS (26 tests) ==========
   const boundaryTests = [
-    // Numeric boundaries (8 tests)
+    // Numeric (8)
     {
-      'Test Scenario': 'Verify minimum numeric value handling',
-      'Pre-Condition': 'Numeric input field exists',
-      'Test Steps': '• Enter minimum value (0 or 1)\n• Verify input accepted\n• Check processing correct\n• Verify no errors',
-      'Test Data': '0, 1, -999999',
+      'Test Scenario': 'Verify minimum numeric value (0)',
+      'Pre-Condition': 'Numeric field exists',
+      'Test Steps': '• Enter minimum value (0)\n• Verify input accepted\n• Check processing correct\n• Verify no errors',
+      'Test Data': '0',
       'Expected Result': 'Minimum values handled correctly',
     },
     {
-      'Test Scenario': 'Verify maximum numeric value handling',
-      'Pre-Condition': 'Numeric input field exists',
+      'Test Scenario': 'Verify maximum numeric value',
+      'Pre-Condition': 'Numeric field exists',
       'Test Steps': '• Enter maximum value\n• Verify input accepted\n• Check processing correct\n• Verify overflow prevention',
       'Test Data': '999999, 2147483647',
       'Expected Result': 'Maximum values handled correctly',
     },
     {
-      'Test Scenario': 'Verify zero value handling',
+      'Test Scenario': 'Verify zero value in calculations',
       'Pre-Condition': 'Numeric field exists',
       'Test Steps': '• Enter zero\n• Verify accepted\n• Check calculations\n• Verify no division errors',
       'Test Data': '0',
@@ -623,37 +623,37 @@ function generateTestCases(ticket) {
       'Expected Result': 'Negative numbers handled per spec',
     },
     {
-      'Test Scenario': 'Verify decimal number handling',
+      'Test Scenario': 'Verify decimal precision',
       'Pre-Condition': 'Numeric field exists',
       'Test Steps': '• Enter decimal values\n• Verify precision maintained\n• Check rounding\n• Verify calculations accurate',
       'Test Data': '0.1, 3.14159, 99.99',
       'Expected Result': 'Decimals handled with correct precision',
     },
     {
-      'Test Scenario': 'Verify very large number handling',
+      'Test Scenario': 'Verify very large numbers',
       'Pre-Condition': 'Numeric field exists',
       'Test Steps': '• Enter very large numbers\n• Verify no overflow\n• Check scientific notation\n• Verify calculations',
       'Test Data': '999999999999, 1e10',
       'Expected Result': 'Large numbers handled without overflow',
     },
     {
-      'Test Scenario': 'Verify number with leading zeros',
+      'Test Scenario': 'Verify leading zeros in numbers',
       'Pre-Condition': 'Numeric field exists',
       'Test Steps': '• Enter numbers with leading zeros\n• Verify trimmed correctly\n• Check stored value\n• Verify display',
       'Test Data': '007, 0123',
       'Expected Result': 'Leading zeros handled correctly',
     },
     {
-      'Test Scenario': 'Verify scientific notation handling',
+      'Test Scenario': 'Verify scientific notation',
       'Pre-Condition': 'Numeric field exists',
       'Test Steps': '• Enter scientific notation\n• Verify parsed correctly\n• Check converted to number\n• Verify calculations',
       'Test Data': '1e5, 1.5e-3',
       'Expected Result': 'Scientific notation handled correctly',
     },
-    // String boundaries (5 tests)
+    // String (5)
     {
       'Test Scenario': 'Verify empty string handling',
-      'Pre-Condition': 'String input field exists',
+      'Pre-Condition': 'String field exists',
       'Test Steps': '• Submit empty string\n• Verify validation\n• Check error message\n• Verify required field handling',
       'Test Data': '""',
       'Expected Result': 'Empty strings handled with validation',
@@ -673,20 +673,20 @@ function generateTestCases(ticket) {
       'Expected Result': 'String length limits enforced',
     },
     {
-      'Test Scenario': 'Verify string with whitespace only',
+      'Test Scenario': 'Verify whitespace-only string',
       'Pre-Condition': 'String field exists',
       'Test Steps': '• Enter spaces only\n• Verify trimming\n• Check validation\n• Verify handling',
       'Test Data': '   , \t\t, \n',
       'Expected Result': 'Whitespace-only strings trimmed or rejected',
     },
     {
-      'Test Scenario': 'Verify string encoding (UTF-8, Unicode)',
+      'Test Scenario': 'Verify Unicode and special characters',
       'Pre-Condition': 'String field exists',
       'Test Steps': '• Enter Unicode characters\n• Enter emoji\n• Enter mixed encodings\n• Verify stored correctly',
       'Test Data': '你好, مرحبا, 🎉',
       'Expected Result': 'Unicode and UTF-8 handled correctly',
     },
-    // Date boundaries (4 tests)
+    // Date (4)
     {
       'Test Scenario': 'Verify minimum date value',
       'Pre-Condition': 'Date field exists',
@@ -702,23 +702,23 @@ function generateTestCases(ticket) {
       'Expected Result': 'Maximum dates handled correctly',
     },
     {
-      'Test Scenario': 'Verify leap year date handling',
+      'Test Scenario': 'Verify leap year handling',
       'Pre-Condition': 'Date field exists',
       'Test Steps': '• Enter leap year date (Feb 29)\n• Test 2000 (leap), 1900 (non-leap)\n• Verify validation\n• Check calculations',
       'Test Data': '2000-02-29, 1900-02-29, 2024-02-29',
       'Expected Result': 'Leap year dates validated correctly',
     },
     {
-      'Test Scenario': 'Verify invalid date format handling',
+      'Test Scenario': 'Verify invalid date format',
       'Pre-Condition': 'Date field exists',
       'Test Steps': '• Enter invalid dates\n• Test wrong format\n• Verify error message\n• Check validation',
-      'Test Data': '32-13-2024, 13/32/2024, invalid',
+      'Test Data': '32-13-2024, 13/32/2024',
       'Expected Result': 'Invalid dates rejected with validation',
     },
-    // Array boundaries (3 tests)
+    // Array (3)
     {
       'Test Scenario': 'Verify empty array handling',
-      'Pre-Condition': 'Array field or list exists',
+      'Pre-Condition': 'Array field exists',
       'Test Steps': '• Submit empty array\n• Verify handling\n• Check display\n• Verify no errors',
       'Test Data': '[]',
       'Expected Result': 'Empty arrays handled correctly',
@@ -735,9 +735,9 @@ function generateTestCases(ticket) {
       'Pre-Condition': 'Array field exists',
       'Test Steps': '• Submit very large array\n• Check memory impact\n• Verify performance\n• Check limits enforced',
       'Test Data': '1000+ items, 10000+ items',
-      'Expected Result': 'Array size limits enforced; Performance acceptable',
+      'Expected Result': 'Array size limits enforced',
     },
-    // Null/Undefined boundaries (2 tests)
+    // Null/Undefined (2)
     {
       'Test Scenario': 'Verify null value handling',
       'Pre-Condition': 'Field allows null',
@@ -750,7 +750,7 @@ function generateTestCases(ticket) {
       'Pre-Condition': 'Field defined',
       'Test Steps': '• Submit undefined value\n• Verify handling\n• Check default value\n• Verify error handling',
       'Test Data': 'undefined, missing field',
-      'Expected Result': 'Undefined values handled with defaults or errors',
+      'Expected Result': 'Undefined values handled with defaults',
     },
   ];
 
@@ -812,7 +812,7 @@ async function generateExcelFile(tickets) {
       headerRow.fill = {
         type: 'pattern',
         pattern: 'solid',
-        fgColor: { argb: 'FF4472C4' }, // Blue header
+        fgColor: { argb: 'FF4472C4' },
       };
       headerRow.font = { color: { argb: 'FFFFFFFF' }, bold: true };
       headerRow.alignment = { horizontal: 'center', vertical: 'center', wrapText: true };
@@ -823,12 +823,11 @@ async function generateExcelFile(tickets) {
         row.alignment = { vertical: 'top', wrapText: true };
         row.height = 60;
 
-        // Alternate row colors
         if (index % 2 === 0) {
           row.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFF2F2F2' }, // Light gray
+            fgColor: { argb: 'FFF2F2F2' },
           };
         }
       });
@@ -846,11 +845,11 @@ async function generateExcelFile(tickets) {
         ['Positive Test Cases', testCases.filter(t => t['Test Type'] === 'Positive').length],
         ['Negative Test Cases', testCases.filter(t => t['Test Type'] === 'Negative').length],
         ['Edge Case Test Cases', testCases.filter(t => t['Test Type'] === 'Edge Case').length],
-        ['Security Test Cases', testCases.filter(t => t['Test Type'] === 'Security').length],
         ['Accessibility Test Cases', testCases.filter(t => t['Test Type'] === 'Accessibility').length],
         ['Responsive Test Cases', testCases.filter(t => t['Test Type'] === 'Responsive').length],
-        ['UI Test Cases', testCases.filter(t => t['Test Type'] === 'UI').length],
         ['Cross-Browser Test Cases', testCases.filter(t => t['Test Type'] === 'Cross-Browser').length],
+        ['UI Test Cases', testCases.filter(t => t['Test Type'] === 'UI').length],
+        ['Security Test Cases', testCases.filter(t => t['Test Type'] === 'Security').length],
         ['Performance Test Cases', testCases.filter(t => t['Test Type'] === 'Performance').length],
         ['Integration Test Cases', testCases.filter(t => t['Test Type'] === 'Integration').length],
         ['Boundary Value Test Cases', testCases.filter(t => t['Test Type'] === 'Boundary Value').length],
@@ -863,7 +862,7 @@ async function generateExcelFile(tickets) {
           row.fill = {
             type: 'pattern',
             pattern: 'solid',
-            fgColor: { argb: 'FFDDEBF7' }, // Light blue
+            fgColor: { argb: 'FFDDEBF7' },
           };
         } else if (index > 1) {
           if (index % 2 === 0) {
@@ -893,8 +892,8 @@ async function generateExcelFile(tickets) {
       console.log(`    • ${testCases.filter(t => t['Test Type'] === 'Security').length} Security Tests`);
       console.log(`    • ${testCases.filter(t => t['Test Type'] === 'Accessibility').length} Accessibility Tests`);
       console.log(`    • ${testCases.filter(t => t['Test Type'] === 'Responsive').length} Responsive Tests`);
-      console.log(`    • ${testCases.filter(t => t['Test Type'] === 'UI').length} UI Tests`);
       console.log(`    • ${testCases.filter(t => t['Test Type'] === 'Cross-Browser').length} Cross-Browser Tests`);
+      console.log(`    • ${testCases.filter(t => t['Test Type'] === 'UI').length} UI Tests`);
       console.log(`    • ${testCases.filter(t => t['Test Type'] === 'Performance').length} Performance Tests`);
       console.log(`    • ${testCases.filter(t => t['Test Type'] === 'Integration').length} Integration Tests`);
       console.log(`    • ${testCases.filter(t => t['Test Type'] === 'Boundary Value').length} Boundary Value Tests`);
@@ -913,7 +912,7 @@ if (args.length === 0) {
 
 console.log('==========================================================================================');
 console.log('🚀 TEST CASE GENERATOR - Reference Format');
-console.log('83 Comprehensive Test Cases | Same Format as GAAM-524 Reference | Professional Excel');
+console.log('83 Test Cases | Same Format as GAAM-524 Reference | Professional Excel');
 console.log('==========================================================================================\n');
 
 generateExcelFile(args);
