@@ -1081,6 +1081,43 @@ class TestCaseGenerator {
       worksheet.getColumn(col).width = columnWidths[col];
     });
 
+    // ============ ADD SUMMARY SECTION ============
+    const summaryStartRow = headers.length + testCases.length + 5;
+
+    // Add empty rows
+    worksheet.addRow([]);
+    worksheet.addRow([]);
+
+    // Count test cases by type
+    const testTypeCount = {};
+    testCases.forEach(tc => {
+      const type = tc['Test Type'] || 'Unknown';
+      testTypeCount[type] = (testTypeCount[type] || 0) + 1;
+    });
+
+    // Add summary header
+    const summaryHeaderRow = worksheet.addRow(['TEST CASE SUMMARY']);
+    summaryHeaderRow.getCell(1).font = { bold: true, size: 12 };
+    summaryHeaderRow.getCell(1).fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FFDDEBF7' }
+    };
+
+    // Add empty row
+    worksheet.addRow([]);
+
+    // Add total
+    const totalRow = worksheet.addRow(['Total Test Cases', testCases.length]);
+    totalRow.getCell(1).font = { bold: true };
+
+    // Add breakdown by type
+    const sortedTypes = Object.keys(testTypeCount).sort();
+    sortedTypes.forEach(type => {
+      const row = worksheet.addRow([`${type} Test Cases`, testTypeCount[type]]);
+      row.getCell(1).font = { bold: false };
+    });
+
     // Save file
     const safeFileName = summary.replace(/[^a-z0-9]/gi, '_').substring(0, 50);
     const filename = `${ticketKey}_${safeFileName}.xlsx`;
