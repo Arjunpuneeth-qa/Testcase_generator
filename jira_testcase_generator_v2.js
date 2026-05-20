@@ -116,10 +116,15 @@ class TestCaseGenerator {
     // Add universal tests if less than 30 test cases
     if (testCases.length < 30) {
       testCases.push(...this.generateUniversalTests(summary, tcCounter));
+      tcCounter += 10;
     }
 
+    // Add boundary value tests for comprehensive coverage
+    testCases.push(...this.generateBoundaryValueTests(summary, tcCounter));
+    tcCounter += 26;
+
     // Ensure we have enough test cases
-    while (testCases.length < 30) {
+    while (testCases.length < 50) {
       testCases.push({
         TC_ID: `TC_${String(tcCounter++).padStart(3, '0')}`,
         'Test Scenario': `Verify additional functionality - ${Math.random().toString(36).substring(7)}`,
@@ -134,6 +139,236 @@ class TestCaseGenerator {
     }
 
     return { testCases: testCases.slice(0, 50), ticketKey, summary };
+  }
+
+  generateBoundaryValueTests(summary, startCounter) {
+    return [
+      // Numeric boundaries (8 tests)
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify minimum numeric value (0)',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Numeric input field',
+        'Test Steps': '• Enter minimum value (0)\n• Submit form',
+        'Test Data': '0',
+        'Expected Result': 'Accepted and processed correctly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify maximum numeric value',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Numeric input field',
+        'Test Steps': '• Enter maximum value\n• Submit form',
+        'Test Data': '999999, 2147483647',
+        'Expected Result': 'Handled without overflow',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify negative numbers',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Numeric field',
+        'Test Steps': '• Enter negative values\n• Verify acceptance per spec',
+        'Test Data': '-1, -100, -999',
+        'Expected Result': 'Handled per specification',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify decimal precision',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Decimal field',
+        'Test Steps': '• Enter decimal values\n• Verify precision maintained',
+        'Test Data': '0.1, 3.14159, 99.99',
+        'Expected Result': 'Decimals handled with correct precision',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify zero in calculations',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Calculation field',
+        'Test Steps': '• Enter zero\n• Perform calculations',
+        'Test Data': '0',
+        'Expected Result': 'No division errors or invalid states',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify very large numbers',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Numeric field',
+        'Test Steps': '• Enter very large numbers\n• Check overflow prevention',
+        'Test Data': '999999999999, 1e10',
+        'Expected Result': 'Handled without overflow',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify leading zeros in numbers',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Numeric field',
+        'Test Steps': '• Enter numbers with leading zeros\n• Verify trimmed correctly',
+        'Test Data': '007, 0123',
+        'Expected Result': 'Leading zeros handled correctly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify scientific notation',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Numeric field',
+        'Test Steps': '• Enter scientific notation\n• Verify parsed correctly',
+        'Test Data': '1e5, 1.5e-3',
+        'Expected Result': 'Scientific notation handled correctly',
+        'Status': ''
+      },
+      // String boundaries (5 tests)
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify empty string handling',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'String field',
+        'Test Steps': '• Submit empty string\n• Verify validation',
+        'Test Data': '""',
+        'Expected Result': 'Empty strings validated properly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify single character string',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'String field',
+        'Test Steps': '• Enter single character\n• Verify accepted',
+        'Test Data': 'a, 1, !',
+        'Expected Result': 'Single characters handled correctly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify maximum string length',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'String field with limit',
+        'Test Steps': '• Enter string at max length\n• Verify truncation or error',
+        'Test Data': '255 chars, 1000 chars',
+        'Expected Result': 'String length limits enforced',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify whitespace-only string',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'String field',
+        'Test Steps': '• Enter spaces only\n• Verify trimming or rejection',
+        'Test Data': '   , \\t\\t, \\n',
+        'Expected Result': 'Whitespace-only strings trimmed or rejected',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify Unicode and special characters',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'String field',
+        'Test Steps': '• Enter Unicode characters\n• Enter emoji\n• Verify stored correctly',
+        'Test Data': 'Chinese, Arabic, emoji 🎉',
+        'Expected Result': 'Unicode and UTF-8 handled correctly',
+        'Status': ''
+      },
+      // Date boundaries (4 tests)
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify minimum date value',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Date field',
+        'Test Steps': '• Enter minimum date\n• Verify accepted',
+        'Test Data': '1900-01-01, 1970-01-01',
+        'Expected Result': 'Minimum dates handled correctly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify maximum date value',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Date field',
+        'Test Steps': '• Enter maximum date\n• Verify accepted',
+        'Test Data': '2099-12-31, 9999-12-31',
+        'Expected Result': 'Maximum dates handled correctly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify leap year handling',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Date field',
+        'Test Steps': '• Enter leap year date (Feb 29)\n• Verify validation',
+        'Test Data': '2000-02-29, 1900-02-29, 2024-02-29',
+        'Expected Result': 'Leap year dates validated correctly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify invalid date format',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Date field',
+        'Test Steps': '• Enter invalid dates\n• Test wrong format',
+        'Test Data': '32-13-2024, 13/32/2024',
+        'Expected Result': 'Invalid dates rejected with validation',
+        'Status': ''
+      },
+      // Array boundaries (3 tests)
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify empty array handling',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Array field',
+        'Test Steps': '• Submit empty array\n• Verify handling',
+        'Test Data': '[]',
+        'Expected Result': 'Empty arrays handled correctly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify single item array',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Array field',
+        'Test Steps': '• Submit array with one item\n• Verify accepted',
+        'Test Data': '[1], ["item"]',
+        'Expected Result': 'Single-item arrays handled correctly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify maximum array size',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Array field',
+        'Test Steps': '• Submit very large array\n• Check performance',
+        'Test Data': '1000+ items, 10000+ items',
+        'Expected Result': 'Array size limits enforced, performance acceptable',
+        'Status': ''
+      },
+      // Null/Undefined boundaries (2 tests)
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify null value handling',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Field allows null',
+        'Test Steps': '• Submit null value\n• Check storage and retrieval',
+        'Test Data': 'null',
+        'Expected Result': 'Null values handled correctly',
+        'Status': ''
+      },
+      {
+        TC_ID: `TC_${String(startCounter++).padStart(3, '0')}`,
+        'Test Scenario': 'Verify undefined value handling',
+        'Test Type': 'Boundary Value',
+        'Pre-Condition': 'Field defined',
+        'Test Steps': '• Submit undefined value\n• Check default or error',
+        'Test Data': 'undefined, missing field',
+        'Expected Result': 'Undefined values handled with defaults or errors',
+        'Status': ''
+      },
+    ];
   }
 
   generateClickTrackingTests(summary, startCounter) {
