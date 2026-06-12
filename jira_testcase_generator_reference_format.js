@@ -876,8 +876,7 @@ async function generateExcelFile(tickets) {
       });
 
       // ============ SAVE FILE ============
-      const description = ticketData.fields.summary.substring(0, 40).replace(/[^a-zA-Z0-9]/g, '_');
-      const fileName = `${ticket}_REFERENCE_FORMAT_${description}.xlsx`;
+      const fileName = `${ticket}.xlsx`;
       const filePath = path.join(__dirname, 'GA_testcases', fileName);
 
       fs.mkdirSync(path.join(__dirname, 'GA_testcases'), { recursive: true });

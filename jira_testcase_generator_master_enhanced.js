@@ -842,7 +842,7 @@ async function main() {
     const testCases = generateEnhancedTestCases(ticket);
     const filename = path.join(
       outputDir,
-      `${ticketId}_ENHANCED_MASTER_${(ticket.fields.summary || ticketId).replace(/[^a-zA-Z0-9]/g, '_').substring(0, 40)}.xlsx`
+      `${ticketId}.xlsx`
     );
 
     await createExcelFile(ticket, testCases, filename);

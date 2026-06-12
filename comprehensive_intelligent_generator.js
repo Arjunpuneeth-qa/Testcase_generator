@@ -565,8 +565,7 @@ class ComprehensiveIntelligentGenerator {
     const columnWidths = { 'A': 8, 'B': 18, 'C': 32, 'D': 28, 'E': 44, 'F': 16, 'G': 36, 'H': 10 };
     Object.keys(columnWidths).forEach(col => { worksheet.getColumn(col).width = columnWidths[col]; });
 
-    const safeSummary = summary.replace(/[<>:"|?*\\/]/g, '-').replace(/\s+/g, ' ').replace(/\s-\s/g, ' - ').trim();
-    const filename = `${ticketKey}_${safeSummary}.xlsx`;
+    const filename = `${ticketKey}.xlsx`;
     const filepath = path.join(this.outputDir, filename);
 
     await workbook.xlsx.writeFile(filepath);

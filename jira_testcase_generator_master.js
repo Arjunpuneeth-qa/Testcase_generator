@@ -749,7 +749,7 @@ async function main() {
     const testCases = generateMasterTestCases(ticket);
     const filename = path.join(
       outputDir,
-      `${ticketId}_MASTER_${(ticket.fields.summary || ticketId).replace(/[^a-zA-Z0-9]/g, '_').substring(0, 50)}.xlsx`
+      `${ticketId}.xlsx`
     );
 
     await createExcelFile(ticket, testCases, filename);

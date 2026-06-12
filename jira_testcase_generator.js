@@ -638,8 +638,7 @@ class ExcelGenerator {
   }
 
   static _getSafeFilePath(ticketKey, summary, outputDir) {
-    const safeFileName = summary.replace(/[^a-z0-9]/gi, '_').substring(0, 50);
-    const filename = `${ticketKey}_${safeFileName}.xlsx`;
+    const filename = `${ticketKey}.xlsx`;
     return path.join(outputDir, filename);
   }
 }

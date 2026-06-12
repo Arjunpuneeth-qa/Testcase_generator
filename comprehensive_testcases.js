@@ -1577,8 +1577,7 @@ class ComprehensiveTestCaseGenerator {
       worksheet.getColumn(col).width = columnWidths[col];
     });
 
-    const safeFileName = summary.replace(/[^a-z0-9]/gi, '_').substring(0, 50);
-    const filename = `${ticketKey}_COMPREHENSIVE_${safeFileName}.xlsx`;
+    const filename = `${ticketKey}.xlsx`;
     const filepath = path.join(this.outputDir, filename);
 
     await workbook.xlsx.writeFile(filepath);
